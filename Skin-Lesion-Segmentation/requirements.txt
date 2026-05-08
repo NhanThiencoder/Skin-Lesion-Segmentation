@@ -1,0 +1,30 @@
+# --- Frameworks ---
+tensorflow
+# hoặc torch, torchvision, torchaudio tùy theo lựa chọn của nhóm
+# torch
+# torchvision
+# torchaudio
+
+# --- Data Handling & Processing ---
+numpy
+pandas
+opencv-python
+Pillow
+scikit-learn
+scikit-image
+albumentations
+
+# --- Visualization ---
+matplotlib
+seaborn
+
+# --- Jupyter Environment ---
+jupyter
+notebook
+
+# --- Utilities ---
+tqdm
+
+# --- Web Framework for Deployment (ví dụ) ---
+# Flask
+# Streamlit
