@@ -37,7 +37,8 @@ Nhiệm vụ này tập trung vào việc triển khai và huấn luyện một 
   - [ ] Định nghĩa hàm mất mát (loss function) phù hợp (ví dụ: Dice Loss, Binary Cross-Entropy).
   - [ ] Lựa chọn bộ tối ưu hóa (optimizer) như Adam hoặc SGD.
   - [ ] Lưu lại mô hình có kết quả tốt nhất trên tập validation vào thư mục `models/`.
-- [ ] Áp dụng Transfer Learning: sử dụng một backbone đã được huấn luyện trước (ví dụ: ResNet34) cho phần encoder của U-Net để cải thiện hiệu suất.
+- [ ] Áp dụng **Transfer Learning**: sử dụng một backbone (VGG hoặc ResNet) đã được pre-train làm encoder để trích xuất đặc trưng.
+- [ ] Thực hiện **Parameter Tuning** (tinh chỉnh learning rate, batch size, epoch) để tối ưu hóa mô hình.
 
 ---
 
@@ -49,7 +50,7 @@ Nhiệm vụ này tập trung vào việc triển khai và huấn luyện một 
 Nhiệm vụ này yêu cầu nghiên cứu và áp dụng một kiến trúc có sử dụng cơ chế Attention để cải thiện khả năng tập trung của mô hình vào các vùng quan trọng.
 
 **Danh sách công việc:**
-- [ ] Nghiên cứu các kiến trúc có cơ chế Attention (ví dụ: Attention U-Net, hoặc các biến thể của Transformer cho segmentation như TransUNet).
+- [ ] Nghiên cứu và lựa chọn kiến trúc có cơ chế **Attention / Transformer / ViT** (Ví dụ: TransUNet - kết hợp U-Net và Vision Transformer cho phân vùng ảnh).
 - [ ] Lựa chọn và triển khai kiến trúc mô hình trong `src/model_architectures/`.
 - [ ] Tái sử dụng hoặc điều chỉnh script huấn luyện từ `Issue 2` để huấn luyện mô hình mới này.
 - [ ] So sánh hiệu suất ban đầu của mô hình này với mô hình CNN từ `Issue 2`.
@@ -66,11 +67,12 @@ Công việc này tập trung vào việc đánh giá chi tiết các mô hình 
 
 **Danh sách công việc:**
 - [ ] Viết script trong `src/evaluation/evaluate.py` để:
-  - [ ] Tải mô hình đã huấn luyện từ thư mục `models/`.
+  - [ ] Tải 2 mô hình (CNN và Attention) đã huấn luyện từ thư mục `models/`.
+  - [ ] Áp dụng **Ensemble Learning** kết hợp kết quả dự đoán của cả 2 mô hình để tạo ra mặt nạ dự đoán cuối cùng (nhằm nâng cao độ chính xác).
   - [ ] Chạy dự đoán trên tập test.
-  - [ ] Tính toán các chỉ số đánh giá: Dice Coefficient, Jaccard Index (IoU), Accuracy, Precision, Recall.
+  - [ ] In ra các chỉ số đánh giá: Dice Coefficient, Jaccard Index (IoU), Accuracy, Precision, Recall.
   - [ ] Trực quan hóa kết quả: hiển thị hình ảnh gốc, mặt nạ thực tế và mặt nạ dự đoán cạnh nhau.
-- [ ] Tạo một Jupyter Notebook trong `notebooks/` để trình bày và so sánh kết quả của các mô hình.
+- [ ] Tạo một Jupyter Notebook trong `notebooks/` để trình bày và so sánh kết quả của các mô hình đơn lẻ và mô hình Ensemble.
 - [ ] Xây dựng một ứng dụng web đơn giản (sử dụng Streamlit hoặc Flask) trong `src/deployment/`:
   - [ ] Giao diện cho phép người dùng tải lên một hình ảnh tổn thương da.
   - [ ] Ứng dụng sẽ xử lý ảnh, dùng mô hình tốt nhất để dự đoán và hiển thị ảnh gốc cùng với vùng tổn thương được phân vùng.
