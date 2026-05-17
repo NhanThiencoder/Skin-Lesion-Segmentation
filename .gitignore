@@ -157,6 +157,12 @@ cython_debug/
 /models/*
 !/models/.gitkeep
 
+# Processed artifacts (large) are stored locally or downloaded via Drive
+/processed/*
+!/processed/.gitkeep
+!/processed/**/metadata.json
+!/processed/**/manifests/*.json
+
 # OS-specific files
 .DS_Store
 Thumbs.db
