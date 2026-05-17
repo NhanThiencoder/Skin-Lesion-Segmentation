@@ -1,5 +1,6 @@
 import argparse
 import json
+import random
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -97,14 +98,29 @@ def main() -> None:
     parser.add_argument(
         "--out-dir",
         type=Path,
-        default=Path("data") / "processed",
-        help="Output root (default: data/processed)",
+        default=Path("processed"),
+        help="Output root (default: processed/)",
     )
     parser.add_argument(
         "--size",
         type=int,
         default=256,
         help="Target square size (default: 256)",
+    )
+    parser.add_argument(
+        "--limit-per-split",
+        type=int,
+        default=0,
+        help=(
+            "If > 0, only process up to N (image,mask) pairs per split. "
+            "Useful to create a small sharable processed subset."
+        ),
+    )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=42,
+        help="Random seed used when --limit-per-split is set (default: 42)",
     )
     parser.add_argument(
         "--normalize-imagenet",
@@ -163,7 +179,11 @@ def main() -> None:
             raise SystemExit(f"Missing masks dir: {sp.masks_dir}")
 
     norm_tag = "imagenet" if args.normalize_imagenet else "nonorm"
-    out_root = args.out_dir / f"ISIC2018_{args.size}_{norm_tag}"
+    layout_tag = "chw" if args.channels_first else "hwc"
+    run_tag = f"ISIC2018_{args.size}_{norm_tag}_{layout_tag}"
+    if args.limit_per_split and args.limit_per_split > 0:
+        run_tag += f"_limit{args.limit_per_split}"
+    out_root = args.out_dir / run_tag
     images_out_root = out_root / "images"
     masks_out_root = out_root / "masks"
     out_root.mkdir(parents=True, exist_ok=True)
@@ -173,6 +193,8 @@ def main() -> None:
     print("[preprocess] size  :", args.size)
     print("[preprocess] norm  :", "ImageNet" if args.normalize_imagenet else "disabled")
     print("[preprocess] layout:", "CHW" if args.channels_first else "HWC")
+    if args.limit_per_split and args.limit_per_split > 0:
+        print("[preprocess] limit :", args.limit_per_split, "(seed=", args.seed, ")")
 
     summary: dict[str, dict[str, int]] = {}
 
@@ -194,6 +216,10 @@ def main() -> None:
             "pairs_matched": len(matched),
         }
 
+        if args.limit_per_split and args.limit_per_split > 0:
+            random.Random(args.seed).shuffle(matched)
+            matched = matched[: min(args.limit_per_split, len(matched))]
+
         print(
             f"[{sp.name}] images={len(image_paths)} masks={len(mask_index)} matched={len(matched)}"
         )
@@ -210,8 +236,8 @@ def main() -> None:
 
         for img_path, mask_path in _maybe_tqdm(matched, desc=f"Processing {sp.name}"):
             img_id = img_path.stem
-            out_img = images_out_dir / f"{img_id}.npy"
-            out_mask = masks_out_dir / f"{img_id}.png"
+            out_img = images_out_dir / f"{sp.name}_{img_id}.npy"
+            out_mask = masks_out_dir / f"{sp.name}_{img_id}.png"
 
             if not args.overwrite and out_img.exists() and out_mask.exists():
                 manifest_rows.append(

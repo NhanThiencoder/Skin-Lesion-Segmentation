@@ -72,6 +72,12 @@ Skin-Lesion-Segmentation/
     python src/data_preprocessing/preprocess.py
     ```
 
+    Ghi chú:
+    - Thư mục `data/` chứa dataset gốc (dung lượng lớn) và được cấu hình để không push lên GitHub.
+        - Output sau tiền xử lý (resize + ImageNet normalization) được lưu ở `processed/` để tái sử dụng cho các task khác.
+        - Các file lớn (đặc biệt `*.npy`) trong `processed/` **không được push lên GitHub**; đồng đội sẽ tải qua Google Drive và đặt đúng vào `processed/`.
+        - Repo chỉ giữ lại các file nhỏ như `metadata.json` và `manifests/*.json` để biết cấu trúc và đường dẫn.
+
 2.  **Huấn luyện mô hình:**
     ```bash
     python src/training/train.py --model unet --epochs 50
