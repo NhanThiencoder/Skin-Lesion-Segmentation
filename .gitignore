@@ -154,7 +154,6 @@ cython_debug/
 # Project-specific
 # Dữ liệu lớn và các mô hình đã huấn luyện không nên được đưa lên Git
 /data/*
-!/data/.gitkeep
 /models/*
 !/models/.gitkeep
 
