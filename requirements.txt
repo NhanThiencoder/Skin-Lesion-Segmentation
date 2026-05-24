@@ -28,3 +28,4 @@ tqdm
 # --- Web Framework for Deployment (ví dụ) ---
 # Flask
 # Streamlit
+albumentations>=1.3.1
