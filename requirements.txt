@@ -1,9 +1,14 @@
 # --- Frameworks ---
-tensorflow
-# hoặc torch, torchvision, torchaudio tùy theo lựa chọn của nhóm
-# torch
-# torchvision
-# torchaudio
+# NOTE: This project uses PyTorch for model implementations.
+torch
+torchvision
+
+# (Optional) Keep tensorflow only if you still need it elsewhere.
+# tensorflow
+
+# --- Segmentation model zoo / backbones ---
+segmentation-models-pytorch
+timm
 
 # --- Data Handling & Processing ---
 numpy
