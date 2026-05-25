@@ -2,6 +2,7 @@
 # NOTE: This project uses PyTorch for model implementations.
 torch
 torchvision
+torch-directml  # AMD GPU support on Windows (optional)
 
 # (Optional) Keep tensorflow only if you still need it elsewhere.
 # tensorflow

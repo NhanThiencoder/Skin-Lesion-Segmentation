@@ -3,6 +3,12 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+AGENTS.md
+ISSUE_TEMPLATE.md
+PLAN.md
+TODO.md
+PLANNING.md
+
 
 # C extensions
 *.so
@@ -118,6 +124,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.venv312
 
 # Spyder project settings
 .spyderproject

@@ -1,4 +1,4 @@
-from _future_ import annotations
+from __future__ import annotations
 
 from typing import Any
 
@@ -59,7 +59,7 @@ class SwinUNet(nn.Module):
         classes: int = 1,
         backbone: str = "swin_base_patch4_window7_224",
         img_size: int = 256,
-        pretrained: bool = False,
+        pretrained: bool = True,
         decoder_channels: tuple[int, int, int, int] = (256, 128, 64, 32),
         **kwargs: Any,
     ) -> None:

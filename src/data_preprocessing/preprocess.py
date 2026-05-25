@@ -21,7 +21,11 @@ class SplitSpec:
 
 
 def _iter_images(images_dir: Path) -> list[Path]:
-    return sorted(images_dir.glob("*.jpg"))
+    patterns = ("*.jpg", "*.JPG", "*.jpeg", "*.JPEG", "*.png", "*.PNG")
+    image_paths: list[Path] = []
+    for pattern in patterns:
+        image_paths.extend(images_dir.glob(pattern))
+    return sorted(set(image_paths))
 
 
 def _mask_id(mask_path: Path) -> str:
@@ -33,7 +37,11 @@ def _mask_id(mask_path: Path) -> str:
 
 
 def _build_mask_index(masks_dir: Path) -> dict[str, Path]:
-    masks = sorted(masks_dir.glob("*.png"))
+    patterns = ("*.png", "*.PNG", "*.jpg", "*.JPG")
+    masks: list[Path] = []
+    for pattern in patterns:
+        masks.extend(masks_dir.glob(pattern))
+    masks = sorted(set(masks))
     index: dict[str, Path] = {}
     for mask_path in masks:
         index[_mask_id(mask_path)] = mask_path
@@ -120,20 +128,19 @@ def _build_augmentations(size: int):
             A.Resize(height=size, width=size, interpolation=cv2.INTER_LINEAR),
             A.HorizontalFlip(p=0.5),
             A.VerticalFlip(p=0.5),
-            A.Rotate(limit=30, border_mode=cv2.BORDER_REFLECT_101, p=0.5),
+            A.Rotate(limit=45, border_mode=cv2.BORDER_REFLECT_101, p=0.7),
             A.ColorJitter(
-                brightness=0.2,
-                contrast=0.2,
-                saturation=0.2,
+                brightness=0.3,
+                contrast=0.3,
+                saturation=0.25,
                 hue=0.1,
-                p=0.5,
+                p=0.7,
             ),
             A.ElasticTransform(
-                alpha=1.0,
-                sigma=50.0,
-                alpha_affine=10.0,
+                alpha=40.0,
+                sigma=6.0,
                 border_mode=cv2.BORDER_REFLECT_101,
-                p=0.3,
+                p=0.5,
             ),
         ]
     )
@@ -158,14 +165,20 @@ def main() -> None:
     parser.add_argument(
         "--data-dir",
         type=Path,
-        default=Path("data") / "ISIC2018",
-        help="Dataset root (default: data/ISIC2018)",
+        default=Path("data") / "raw",
+        help="Dataset root (default: data/raw)",
     )
     parser.add_argument(
         "--out-dir",
         type=Path,
-        default=Path("processed"),
-        help="Output root (default: processed/)",
+        default=Path("data") / "processed",
+        help="Output root (default: data/processed)",
+    )
+    parser.add_argument(
+        "--augment-out-dir",
+        type=Path,
+        default=Path("data") / "augmented",
+        help="Augmented output root (default: data/augmented)",
     )
     parser.add_argument(
         "--size",
@@ -233,7 +246,12 @@ def main() -> None:
 
     dataset_dir = args.data_dir
     if not dataset_dir.exists():
-        raise SystemExit(f"data-dir does not exist: {dataset_dir}")
+        fallback_dir = Path("data") / "raw"
+        if args.data_dir == Path("data") / "ISIC2018" and fallback_dir.exists():
+            dataset_dir = fallback_dir
+            print("[preprocess] data-dir not found, using:", dataset_dir)
+        else:
+            raise SystemExit(f"data-dir does not exist: {dataset_dir}")
 
     train = SplitSpec(
         name="train",
@@ -268,6 +286,9 @@ def main() -> None:
     out_root = args.out_dir / run_tag
     images_out_root = out_root / "images"
     masks_out_root = out_root / "masks"
+    aug_out_root = args.augment_out_dir / run_tag
+    aug_images_out_root = aug_out_root / "images"
+    aug_masks_out_root = aug_out_root / "masks"
     out_root.mkdir(parents=True, exist_ok=True)
 
     print("[preprocess] input :", dataset_dir.resolve())
@@ -279,6 +300,7 @@ def main() -> None:
         print("[preprocess] limit :", args.limit_per_split, "(seed=", args.seed, ")")
     if args.augment:
         print("[preprocess] augment:", args.augment_copies, "copies per image")
+        print("[preprocess] augment_out:", aug_out_root.resolve())
 
     summary: dict[str, dict[str, int]] = {}
     augmenter = _build_augmentations(args.size) if args.augment else None
@@ -316,6 +338,12 @@ def main() -> None:
         masks_out_dir = masks_out_root / sp.name
         images_out_dir.mkdir(parents=True, exist_ok=True)
         masks_out_dir.mkdir(parents=True, exist_ok=True)
+
+        if args.augment:
+            aug_images_out_dir = aug_images_out_root / sp.name
+            aug_masks_out_dir = aug_masks_out_root / sp.name
+            aug_images_out_dir.mkdir(parents=True, exist_ok=True)
+            aug_masks_out_dir.mkdir(parents=True, exist_ok=True)
 
         manifest_rows: list[dict[str, str]] = []
 
@@ -368,8 +396,8 @@ def main() -> None:
                     aug_mask = _prepare_mask(aug["mask"], size=args.size)
 
                     aug_id = f"{img_id}_aug{idx + 1}"
-                    aug_img_path = images_out_dir / f"{sp.name}_{aug_id}.npy"
-                    aug_mask_path = masks_out_dir / f"{sp.name}_{aug_id}.png"
+                    aug_img_path = aug_images_out_dir / f"{sp.name}_{aug_id}.npy"
+                    aug_mask_path = aug_masks_out_dir / f"{sp.name}_{aug_id}.png"
 
                     if not args.overwrite and aug_img_path.exists() and aug_mask_path.exists():
                         manifest_rows.append(
@@ -423,6 +451,7 @@ def main() -> None:
                     "augmentation": {
                         "enabled": args.augment,
                         "copies_per_image": args.augment_copies if args.augment else 0,
+                        "output_dir": str(aug_out_root.as_posix()) if args.augment else "",
                         "transforms": [
                             "horizontal_flip",
                             "vertical_flip",
