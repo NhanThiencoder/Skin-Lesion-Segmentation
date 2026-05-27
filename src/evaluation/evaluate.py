@@ -286,6 +286,12 @@ def main() -> None:
     )
     parser.add_argument("--batch-size", type=int, default=8, help="Batch size")
     parser.add_argument("--num-workers", type=int, default=0, help="DataLoader workers")
+    parser.add_argument(
+        "--device",
+        type=str,
+        default=None,
+        help="Device to run evaluation on (e.g. 'cpu', 'cuda'). If not specified, auto-detected.",
+    )
 
     # Visualization
     parser.add_argument("--visualize", action="store_true", help="Generate visual overlays")
@@ -316,7 +322,7 @@ def main() -> None:
     # -----------------------------------------------------------------------
     # Setup
     # -----------------------------------------------------------------------
-    device = get_device()
+    device = torch.device(args.device) if args.device is not None else get_device()
     print("=" * 70)
     print("  Skin Lesion Segmentation - Model Evaluation")
     print("=" * 70)
