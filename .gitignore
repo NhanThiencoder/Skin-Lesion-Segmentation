@@ -163,6 +163,7 @@ cython_debug/
 /data/*
 /models/*
 !/models/.gitkeep
+*.pth
 
 # Processed artifacts (large) are stored locally or downloaded via Drive
 /processed/*

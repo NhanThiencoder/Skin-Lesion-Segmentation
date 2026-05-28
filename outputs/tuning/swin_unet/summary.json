@@ -1,0 +1,192 @@
+{
+  "trials": [
+    {
+      "trial_id": 0,
+      "datetime": "2026-05-28 02:18:14",
+      "status": "COMPLETE",
+      "duration_sec": 4601.146721601486,
+      "params": {
+        "lr": 0.0004095677923919258,
+        "encoder_lr": 9.27729080808654e-06,
+        "weight_decay": 0.000703725276899092,
+        "freeze_encoder": 3,
+        "loss": "focal"
+      },
+      "metrics": {
+        "dice": 0.7914438223838807,
+        "iou": 0.7040067911148071,
+        "accuracy": 0.8980711364746093,
+        "sensitivity": 0.7384923624992371,
+        "specificity": 0.9928491497039795
+      }
+    },
+    {
+      "trial_id": 1,
+      "datetime": "2026-05-28 03:31:29",
+      "status": "COMPLETE",
+      "duration_sec": 4391.756180763245,
+      "params": {
+        "lr": 0.00019528011385584623,
+        "encoder_lr": 7.685030892771538e-06,
+        "weight_decay": 0.0001768859605661122,
+        "freeze_encoder": 4,
+        "loss": "bce_dice"
+      },
+      "metrics": {
+        "dice": 0.8406384229660034,
+        "iou": 0.7488838791847229,
+        "accuracy": 0.9154829406738281,
+        "sensitivity": 0.8789456415176392,
+        "specificity": 0.9580835437774659
+      }
+    },
+    {
+      "trial_id": 2,
+      "datetime": "2026-05-28 04:32:03",
+      "status": "COMPLETE",
+      "duration_sec": 3630.8417131900787,
+      "params": {
+        "lr": 9.824921398669372e-05,
+        "encoder_lr": 1.0860910639663044e-05,
+        "weight_decay": 0.00040510949627575277,
+        "freeze_encoder": 7,
+        "loss": "focal"
+      },
+      "metrics": {
+        "dice": 0.8657561707496643,
+        "iou": 0.7960959959030152,
+        "accuracy": 0.9316627502441406,
+        "sensitivity": 0.8415425252914429,
+        "specificity": 0.9826340222358704
+      }
+    },
+    {
+      "trial_id": 3,
+      "datetime": "2026-05-28 04:39:37",
+      "status": "FAIL",
+      "duration_sec": 453.5145058631897,
+      "params": {
+        "lr": 6.957838572657983e-05,
+        "encoder_lr": 5.904909850797756e-06,
+        "weight_decay": 2.3811720858277465e-05,
+        "freeze_encoder": 4,
+        "loss": "dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 4,
+      "datetime": "2026-05-28 05:48:36",
+      "status": "COMPLETE",
+      "duration_sec": 4135.250119447708,
+      "params": {
+        "lr": 0.00013157225997365918,
+        "encoder_lr": 1.1591153606040286e-05,
+        "weight_decay": 0.0004322894710662207,
+        "freeze_encoder": 5,
+        "loss": "focal"
+      },
+      "metrics": {
+        "dice": 0.8485391855239868,
+        "iou": 0.7748093533515931,
+        "accuracy": 0.9231396484375,
+        "sensitivity": 0.8232006692886352,
+        "specificity": 0.9854312419891358
+      }
+    },
+    {
+      "trial_id": 5,
+      "datetime": "2026-05-28 07:09:32",
+      "status": "COMPLETE",
+      "duration_sec": 4853.318746328354,
+      "params": {
+        "lr": 0.00048693847052726447,
+        "encoder_lr": 4.867487980561159e-05,
+        "weight_decay": 0.0001634964975612309,
+        "freeze_encoder": 2,
+        "loss": "dice"
+      },
+      "metrics": {
+        "dice": 0.8520991349220276,
+        "iou": 0.7566792917251587,
+        "accuracy": 0.9219709777832031,
+        "sensitivity": 0.8955258369445801,
+        "specificity": 0.9585955142974854
+      }
+    },
+    {
+      "trial_id": 6,
+      "datetime": "2026-05-28 07:21:07",
+      "status": "FAIL",
+      "duration_sec": 693.8877906799316,
+      "params": {
+        "lr": 5.616887127773591e-05,
+        "encoder_lr": 1.880190317039527e-05,
+        "weight_decay": 3.398671710943416e-05,
+        "freeze_encoder": 3,
+        "loss": "dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 7,
+      "datetime": "2026-05-28 08:22:12",
+      "status": "COMPLETE",
+      "duration_sec": 3662.3476192951202,
+      "params": {
+        "lr": 0.00011021139482103895,
+        "encoder_lr": 1.9318580605448312e-05,
+        "weight_decay": 2.2184498248815104e-05,
+        "freeze_encoder": 7,
+        "loss": "bce_dice"
+      },
+      "metrics": {
+        "dice": 0.8747398734092713,
+        "iou": 0.7913101863861084,
+        "accuracy": 0.9329403686523438,
+        "sensitivity": 0.9162194728851318,
+        "specificity": 0.9502203464508057
+      }
+    },
+    {
+      "trial_id": 8,
+      "datetime": "2026-05-28 09:38:51",
+      "status": "COMPLETE",
+      "duration_sec": 4596.258048057556,
+      "params": {
+        "lr": 0.00015377017661955225,
+        "encoder_lr": 5.404141955158094e-06,
+        "weight_decay": 0.0006686873817249858,
+        "freeze_encoder": 3,
+        "loss": "dice"
+      },
+      "metrics": {
+        "dice": 0.8434785580635071,
+        "iou": 0.7494783782958985,
+        "accuracy": 0.9158355712890625,
+        "sensitivity": 0.8637437963485718,
+        "specificity": 0.9631749677658081
+      }
+    },
+    {
+      "trial_id": 9,
+      "datetime": "2026-05-28 10:27:26",
+      "status": "COMPLETE",
+      "duration_sec": 2911.49556517601,
+      "params": {
+        "lr": 0.00010849840705033546,
+        "encoder_lr": 5.566283642316994e-06,
+        "weight_decay": 3.1104762219093275e-05,
+        "freeze_encoder": 10,
+        "loss": "focal"
+      },
+      "metrics": {
+        "dice": 0.8825693988800049,
+        "iou": 0.8165460181236267,
+        "accuracy": 0.9384461975097657,
+        "sensitivity": 0.8674105072021484,
+        "specificity": 0.9811394834518432
+      }
+    }
+  ]
+}

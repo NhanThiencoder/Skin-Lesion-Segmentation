@@ -1,0 +1,168 @@
+{
+  "trials": [
+    {
+      "trial_id": 0,
+      "datetime": "2026-05-27 23:32:22",
+      "status": "COMPLETE",
+      "duration_sec": 1170.6985006332397,
+      "params": {
+        "lr": 6.0813661139336375e-05,
+        "encoder_lr": 1.0726176892308283e-05,
+        "weight_decay": 1.634266927238342e-05,
+        "freeze_encoder": 4,
+        "loss": "bce_dice"
+      },
+      "metrics": {
+        "dice": 0.8935077810287475,
+        "iou": 0.818105890750885,
+        "accuracy": 0.9426943969726562,
+        "sensitivity": 0.9350926566123963,
+        "specificity": 0.956073431968689
+      }
+    },
+    {
+      "trial_id": 1,
+      "datetime": "2026-05-27 23:47:51",
+      "status": "COMPLETE",
+      "duration_sec": 928.1480209827423,
+      "params": {
+        "lr": 0.00044285054815689607,
+        "encoder_lr": 3.427855365038692e-05,
+        "weight_decay": 0.0001989099947739595,
+        "freeze_encoder": 8,
+        "loss": "bce_dice"
+      },
+      "metrics": {
+        "dice": 0.8978055191040039,
+        "iou": 0.8236888837814331,
+        "accuracy": 0.9473419189453125,
+        "sensitivity": 0.9479451441764831,
+        "specificity": 0.9440270090103149
+      }
+    },
+    {
+      "trial_id": 2,
+      "datetime": "2026-05-28 00:08:23",
+      "status": "COMPLETE",
+      "duration_sec": 1230.8074429035187,
+      "params": {
+        "lr": 6.568195604316106e-05,
+        "encoder_lr": 7.1899836685012235e-06,
+        "weight_decay": 1.3315752609913386e-05,
+        "freeze_encoder": 2,
+        "loss": "dice"
+      },
+      "metrics": {
+        "dice": 0.889000482559204,
+        "iou": 0.8115468788146972,
+        "accuracy": 0.9411875915527343,
+        "sensitivity": 0.9385798978805542,
+        "specificity": 0.9519536876678467
+      }
+    },
+    {
+      "trial_id": 3,
+      "datetime": "2026-05-28 00:10:11",
+      "status": "FAIL",
+      "duration_sec": 107.67758464813232,
+      "params": {
+        "lr": 0.00017269839372492868,
+        "encoder_lr": 1.849001124139428e-05,
+        "weight_decay": 0.0006718184139952856,
+        "freeze_encoder": 8,
+        "loss": "dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 4,
+      "datetime": "2026-05-28 00:13:46",
+      "status": "FAIL",
+      "duration_sec": 214.97075724601746,
+      "params": {
+        "lr": 0.00016508692733734545,
+        "encoder_lr": 5.103481239532206e-06,
+        "weight_decay": 0.0006415268759348169,
+        "freeze_encoder": 7,
+        "loss": "dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 5,
+      "datetime": "2026-05-28 00:33:41",
+      "status": "COMPLETE",
+      "duration_sec": 1193.388667345047,
+      "params": {
+        "lr": 0.00042403436232298856,
+        "encoder_lr": 3.368597396087255e-05,
+        "weight_decay": 3.8826324124664476e-05,
+        "freeze_encoder": 3,
+        "loss": "bce_dice"
+      },
+      "metrics": {
+        "dice": 0.8990890669822693,
+        "iou": 0.8259038662910462,
+        "accuracy": 0.9474775695800781,
+        "sensitivity": 0.9531160712242126,
+        "specificity": 0.9411000919342041
+      }
+    },
+    {
+      "trial_id": 6,
+      "datetime": "2026-05-28 00:45:12",
+      "status": "FAIL",
+      "duration_sec": 690.7611749172211,
+      "params": {
+        "lr": 0.00010491205912364333,
+        "encoder_lr": 7.292559694184206e-06,
+        "weight_decay": 1.7824078789670207e-05,
+        "freeze_encoder": 4,
+        "loss": "bce_dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 7,
+      "datetime": "2026-05-28 00:47:03",
+      "status": "FAIL",
+      "duration_sec": 111.02604961395264,
+      "params": {
+        "lr": 0.00016029019132598256,
+        "encoder_lr": 3.146554949335587e-05,
+        "weight_decay": 0.00024870415347398296,
+        "freeze_encoder": 7,
+        "loss": "focal"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 8,
+      "datetime": "2026-05-28 00:48:53",
+      "status": "FAIL",
+      "duration_sec": 109.88963675498962,
+      "params": {
+        "lr": 7.400930559799303e-05,
+        "encoder_lr": 1.3076527254264681e-05,
+        "weight_decay": 1.3338353981001866e-05,
+        "freeze_encoder": 6,
+        "loss": "dice"
+      },
+      "metrics": {}
+    },
+    {
+      "trial_id": 9,
+      "datetime": "2026-05-28 00:50:55",
+      "status": "FAIL",
+      "duration_sec": 122.00376629829407,
+      "params": {
+        "lr": 5.433340454212443e-05,
+        "encoder_lr": 2.6721151221303495e-05,
+        "weight_decay": 2.245171972928288e-05,
+        "freeze_encoder": 4,
+        "loss": "dice"
+      },
+      "metrics": {}
+    }
+  ]
+}
