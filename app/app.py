@@ -109,7 +109,7 @@ def generate_pdf_report(patient_id, results_data, save_path):
 # HỆ THỐNG ĐIỀU PHỐI (MAIN)
 # ==========================================
 def main():
-    st.markdown("<div class='hospital-header'><h1>🏥Hệ Thống Hội Chẩn Trí Tuệ Nhân Tạo Ensemble AI</h1></div>", unsafe_allow_html=True)
+    st.markdown("<div class='hospital-header'><h1>Hệ Thống Hội Chẩn Trí Tuệ Nhân Tạo Ensemble AI</h1></div>", unsafe_allow_html=True)
     model_unet, model_swin, device = init_ai_system()
     col_sidebar, col_main = st.columns([1, 3])
     
@@ -119,19 +119,19 @@ def main():
         uploaded_files = st.file_uploader("Tải ảnh lâm sàng (*Bắt buộc, hỗ trợ nhiều ảnh):", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
         
         st.write("") 
-        start_button = st.button("🚀 BẮT ĐẦU CHẨN ĐOÁN", use_container_width=True)
+        start_button = st.button("BẮT ĐẦU CHẨN ĐOÁN", use_container_width=True)
     
     with col_main:
         if not start_button:
-            st.info("👈 Vui lòng nhập Mã Bệnh Án, tải ảnh lên ở cột bên trái và bấm nút 'Bắt đầu chẩn đoán'.")
+            st.info("Vui lòng nhập Mã Bệnh Án, tải ảnh lên ở cột bên trái và bấm nút 'Bắt đầu chẩn đoán'.")
         
         if start_button:
             if not patient_id.strip():
-                st.error("⚠️ Lỗi: Vui lòng nhập Mã Bệnh Án trước khi tiến hành hội chẩn!")
+                st.error("Lỗi: Vui lòng nhập Mã Bệnh Án trước khi tiến hành hội chẩn!")
             elif not uploaded_files:
-                st.error("⚠️ Lỗi: Vui lòng tải ít nhất 1 ảnh lâm sàng lên trước khi tiến hành hội chẩn!")
+                st.error("Lỗi: Vui lòng tải ít nhất 1 ảnh lâm sàng lên trước khi tiến hành hội chẩn!")
             else:
-                st.subheader(f"🖥️ KẾT QUẢ PHÂN TÍCH HÌNH ẢNH (Bệnh án: {patient_id.strip().upper()})")
+                st.subheader(f"KẾT QUẢ PHÂN TÍCH HÌNH ẢNH (Bệnh án: {patient_id.strip().upper()})")
                 
                 tabs = st.tabs([f"Ảnh {i+1}" for i in range(len(uploaded_files))])
                 
@@ -143,7 +143,7 @@ def main():
                         orig_width, orig_height = image_pil.size
                         orig_np = np.array(image_pil)
                         
-                        with st.spinner(f"🤖 Đang phân tích ảnh {i+1}..."):
+                        with st.spinner(f"Đang phân tích ảnh {i+1}..."):
                             img_tensor = preprocess_image(image_pil)
                             raw_mask, confidence = predict_ensemble(img_tensor, model_unet, model_swin, device)
                             
@@ -162,10 +162,10 @@ def main():
                         })
                         
                         if has_lesion:
-                            st.metric(label="🎯 Độ tự tin AI phát hiện tổn thương", value=f"{confidence*100:.1f}%", delta="Bất thường", delta_color="inverse")
+                            st.metric(label="Độ tự tin AI phát hiện tổn thương", value=f"{confidence*100:.1f}%", delta="Bất thường", delta_color="inverse")
                         else:
-                            st.metric(label="🎯 Trạng thái", value="Bình thường", delta="Không phát hiện tổn thương", delta_color="normal")
-                            st.success("✅ AI nhận định vùng da bình thường, không có dấu hiệu bệnh lý nổi bật.")
+                            st.metric(label="Trạng thái", value="Bình thường", delta="Không phát hiện tổn thương", delta_color="normal")
+                            st.success("AI nhận định vùng da bình thường, không có dấu hiệu bệnh lý nổi bật.")
 
                         img_col1, img_col2, img_col3 = st.columns(3)
                         with img_col1:
@@ -191,11 +191,11 @@ def main():
                 
                 generate_pdf_report(patient_id, analysis_results, pdf_filepath)
                 
-                st.success(f"🖨️ Đã tự động tạo báo cáo: **{pdf_filename}**")
+                st.success(f"Đã tự động tạo báo cáo: **{pdf_filename}**")
                 
                 with open(pdf_filepath, "rb") as pdf_file:
                     st.download_button(
-                        label="📥 Tải Báo Cáo Chẩn Đoán (PDF)",
+                        label="Tải Báo Cáo Chẩn Đoán (PDF)",
                         data=pdf_file,
                         file_name=pdf_filename,
                         mime="application/pdf",

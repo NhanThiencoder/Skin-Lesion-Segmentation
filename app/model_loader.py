@@ -3,9 +3,7 @@ import sys
 import torch
 
 # --- CẬP NHẬT ĐƯỜNG DẪN ---
-# current_dir đang là thư mục app/
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Lùi lại 1 cấp để ra thư mục gốc (Skin-Lesion-Segmentation)
 project_root = os.path.abspath(os.path.join(current_dir, ".."))
 
 if project_root not in sys.path:
